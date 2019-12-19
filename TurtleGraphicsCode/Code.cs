@@ -1,42 +1,60 @@
 ﻿using System;
 
-namespace TurtleGraphicsCode {
+namespace TurtleGraphicsCode
+{
 
-	public class Code {
+    public class Code
+    {
 
-		/// <summary>
-		/// This is the place to put your turtle code
-		/// </summary>
-		public Turtle ToExecute() {
-			Turtle t = new Turtle(true);
-			t.BackgroundColor = "Black";
-			t.Rotate(-90);
+        /// <summary>
+        /// This is the place to put your turtle code
+        /// </summary>
+        public Turtle ToExecute()
+        {
+            Turtle t = new Turtle(true);
+            t.BackgroundColor = "Black";
+            t.Rotate(-90);
+            t.TurtleSpeed = 15;
+            for (int i = 0; i < 6; i++)
+            {
+                t.StoreTurtlePosition();
 
-			for (int i = 0; i < 6; i++) {
-				t.StoreTurtlePosition();
+                for (int j = 0; j < 20; j++)
+                {
+                    DrawSection(t, 100 -5*j);
+                }
 
-				for (int j = 0; j < 20; j++) {
-					DrawSection(t, 100);
-				}
+                t.RestoreTurtlePosition();
+                t.Rotate(60);
+                t.CaptureScreenshot();
+            }
+            return t;
+        }
 
-				t.RestoreTurtlePosition();
-				t.Rotate(60);
-				t.CaptureScreenshot();
-			}
-			return t;
-		}
+        void DrawSection(Turtle t, int p)
+        {
+            for (int i = 0; i < 10; i++)
+            {
 
-		void DrawSection(Turtle t, int p) {
-			t.Forward(10);
-			t.StoreTurtlePosition();
-			t.Rotate(-45);
-			t.Forward(p);
-			t.RestoreTurtlePosition();
-			t.Rotate(45);
-			t.Forward(p);
-			t.RestoreTurtlePosition(true);
-		}
-	}
+                t.Forward(2);
+
+                t.SetColor(90 + i*15, 170, 200);
+
+            }
+            t.StoreTurtlePosition();
+            t.Rotate(-45);
+            for (int i = 0; i < p; i++)
+            {
+                t.Forward(1);
+                t.SetColor(i + 100,0,0);
+            }
+            t.SetColor(90, 170, 200);
+            t.RestoreTurtlePosition();
+            t.Rotate(45);
+            t.Forward(p);
+            t.RestoreTurtlePosition(true);
+        }
+    }
 }
 
 
